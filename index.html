@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heroico Colegio Militar No. 29 | Portal Académico</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Librería para Sincronización Global Real (P2P) -->
+    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+</head>
+<body>
+
+    <!-- Sección de Login -->
+    <div id="login-container" class="screen hidden">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo-circle">29</div>
+                <h1>Heroico Colegio Militar No. 29</h1>
+                <p>Portal Académico Profesional</p>
+            </div>
+            <form id="login-form">
+                <div class="field">
+                    <label>Nombre del Alumno</label>
+                    <input type="text" id="name-input" required placeholder="Ingresa tu nombre">
+                </div>
+                <div class="field">
+                    <label>Contraseña</label>
+                    <input type="password" id="pass-input" required placeholder="••••••••">
+                </div>
+                <div class="field admin-section">
+                    <label>Código de Admin (Opcional)</label>
+                    <input type="text" id="admin-input" placeholder="Código de acceso">
+                </div>
+                <button type="submit" class="btn-main">Acceder al Portal</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sección de Dashboard -->
+    <div id="dashboard-container" class="screen hidden">
+        <header class="app-bar">
+            <div class="app-bar-inner">
+                <div class="brand">
+                    <span class="tag">HCM29</span>
+                    <h2 class="desktop-text">Heroico Colegio Militar No. 29</h2>
+                    <span class="status-badge" id="sync-status">🟢 Conectado Global</span>
+                </div>
+                <div class="user-meta">
+                    <div class="meta-text">
+                        <span id="user-display-name">Usuario</span>
+                        <small id="user-display-role">Alumno</small>
+                    </div>
+                    <button id="btn-logout" class="btn-ghost">Cerrar Sesión</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="content-grid">
+            <!-- Izquierda: Menú -->
+            <aside class="col-side">
+                <div class="card nav-menu">
+                    <span class="card-title">Menú Académico</span>
+                    <ul id="main-menu">
+                        <li class="menu-item active" data-view="inicio">🏠 Inicio</li>
+                        <li class="menu-item" data-view="cursos">📚 Mis Cursos</li>
+                        <li class="menu-item" data-view="calificaciones">📝 Calificaciones</li>
+                        <li class="menu-item" data-view="biblioteca">🏛️ Biblioteca</li>
+                    </ul>
+                </div>
+                <div id="admin-controls" class="card admin-special hidden">
+                    <h3>Panel de Arturo</h3>
+                    <p>Acceso administrativo completo.</p>
+                    <button id="btn-admin-manage" class="btn-action">Gestionar Base Global</button>
+                    <button id="btn-admin-clear" class="btn-action btn-danger">Limpiar Feed</button>
+                </div>
+            </aside>
+
+            <!-- Centro: Feed y Vistas -->
+            <section class="col-main">
+                <div id="view-inicio" class="content-view">
+                    <div class="card create-post">
+                        <h3>Publicación Institucional</h3>
+                        <form id="form-post">
+                            <textarea id="post-text" placeholder="Comparte información con todos los dispositivos..."></textarea>
+                            <div class="form-footer">
+                                <label class="btn-file">
+                                    📎 Adjuntar
+                                    <input type="file" id="post-file" hidden>
+                                </label>
+                                <span id="file-name" class="file-name-hint"></span>
+                                <button type="submit" class="btn-main">Publicar Globalmente</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="feed-items" class="feed-stack">
+                        <!-- Los posts globales aparecerán aquí -->
+                    </div>
+                </div>
+
+                <div id="view-cursos" class="content-view card hidden">
+                    <h3>Mis Cursos</h3>
+                    <p class="text-muted">No tienes cursos inscritos para el ciclo escolar actual.</p>
+                </div>
+
+                <div id="view-calificaciones" class="content-view card hidden">
+                    <h3>Calificaciones</h3>
+                    <p class="text-muted">El periodo de evaluación aún no ha comenzado.</p>
+                </div>
+
+                <div id="view-biblioteca" class="content-view card hidden">
+                    <h3>Biblioteca Digital</h3>
+                    <p class="text-muted">Acceso restringido a recursos digitales del Colegio.</p>
+                </div>
+            </section>
+
+            <!-- Derecha: Calendario -->
+            <aside class="col-events">
+                <div class="card calendar-box">
+                    <div class="cal-head">
+                        <h3>Calendario Global</h3>
+                        <button id="btn-add-event" class="btn-icon hidden">+</button>
+                    </div>
+                    <div id="event-editor" class="event-editor hidden">
+                        <input type="text" id="ev-title" placeholder="Materia">
+                        <input type="date" id="ev-date">
+                        <button id="btn-save-event" class="btn-main btn-sm">Guardar para Todos</button>
+                    </div>
+                    <div id="list-events" class="events-stack">
+                        <!-- Eventos globales -->
+                    </div>
+                    <div class="cal-foot">
+                        <p>©2026 Daniel Arturo</p>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
